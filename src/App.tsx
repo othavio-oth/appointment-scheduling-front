@@ -1,6 +1,7 @@
-import { BrowserRouter, Route, Router, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import Register from "./components/Register";
+import Register from "./pages/Register";
+import RegisterPacient from "./pages/pacient/Register";
 
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/register" element={<Register />}></Route>
+          <Route path="pacients/register" element={<RegisterPacient />}></Route>
         </Routes>
       </BrowserRouter>
     </div>
