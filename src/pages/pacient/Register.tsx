@@ -11,7 +11,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-
+import { registerPacient } from "@/api/services/pacient";
 const schema = z.object({
   name: z
     .string()
@@ -19,7 +19,7 @@ const schema = z.object({
     .max(100),
   email: z.string().email({ message: "Email inválido" }),
   cpf: z.string().min(11, { message: "CPF precisa ter 11 caracteres" }),
-  birthDate: z.string().datetime(),
+  //birthDate: z.string().datetime(),
 });
 
 const RegisterPacient = () => {
@@ -32,9 +32,13 @@ const RegisterPacient = () => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof schema>) {
-    console.log(values);
-  }
+  const onSubmit = async (values: z.infer<typeof schema>) => {
+    try {
+      await registerPacient(values);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Form {...form}>
@@ -78,7 +82,7 @@ const RegisterPacient = () => {
             </FormItem>
           )}
         />
-        <FormField
+        {/* <FormField
           control={form.control}
           name="birthDate"
           render={({ field }) => (
@@ -94,7 +98,7 @@ const RegisterPacient = () => {
               <FormMessage />
             </FormItem>
           )}
-        />
+        /> */}
         <Button type="submit">Registrar</Button>
       </form>
     </Form>
